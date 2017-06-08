@@ -2,6 +2,7 @@
 namespace Gnavi\Api;
 
 use Gnavi\Api\ApiInterface;
+use Gnavi\Api\ApiTrait;
 
 class RestSearch implements ApiInterface
 {
