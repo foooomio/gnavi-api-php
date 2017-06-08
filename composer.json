@@ -1,0 +1,27 @@
+{
+    "name": "foooomio/gnavi-api",
+    "description": "Gurunavi restaurant search API client for PHP",
+    "type": "library",
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "foooomio",
+            "email": "foooomio@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gnavi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Gnavi\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
