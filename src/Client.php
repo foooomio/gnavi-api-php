@@ -15,14 +15,14 @@ class Client
     public function __construct($access_key, array $curl_options = [])
     {
         $this->access_key = $access_key;
-        $this->curl_options = array_merge($this->curl_options, $curl_options);
+        $this->curl_options = $curl_options + $this->curl_options;
     }
 
     public function request(ApiInterface $api, array $curl_options = [])
     {
         $url = $this->buildUrl($api);
         $ch = curl_init($url);
-        curl_setopt_array($ch, array_merge($this->curl_options, $curl_options));
+        curl_setopt_array($ch, $curl_options + $this->curl_options);
 
         $response = curl_exec($ch);
         curl_close($ch);
