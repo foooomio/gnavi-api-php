@@ -8,23 +8,21 @@ class Client
     const BASE_URL = 'https://api.gnavi.co.jp';
 
     private $access_key;
+    private $curl_options = [
+        CURLOPT_RETURNTRANSFER => true,
+    ];
 
-    public function __construct($access_key)
+    public function __construct($access_key, array $curl_options = [])
     {
         $this->access_key = $access_key;
+        $this->curl_options = array_merge($this->curl_options, $curl_options);
     }
 
-    public function request(ApiInterface $api)
+    public function request(ApiInterface $api, array $curl_options = [])
     {
-        $url = self::BASE_URL
-            . $api->getUrlPath() . '?'
-            . $api->getUrlQuery($this->access_key);
-
+        $url = $this->buildUrl($api);
         $ch = curl_init($url);
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 3,
-        ]);
+        curl_setopt_array($ch, array_merge($this->curl_options, $curl_options));
 
         $response = curl_exec($ch);
         curl_close($ch);
@@ -33,6 +31,13 @@ class Client
             exit(1);
         }
 
-        return json_decode($response);
+        return json_decode($response, true);
+    }
+
+    private function buildUrl(ApiInterface $api)
+    {
+        $path = $api->getPath();
+        $query = $api->getQuery($this->access_key);
+        return implode('', [self::BASE_URL, $path, '?', $query]);
     }
 }

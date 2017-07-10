@@ -12,20 +12,20 @@ class RestSearchTest extends \PHPUnit_Framework_TestCase
         $this->api = new RestSearch();
     }
 
-    public function testGetUrlPath()
+    public function testGetPath()
     {
         $expected = '/RestSearchAPI/20150630/';
-        $actual = $this->api->getUrlPath();
+        $actual = $this->api->getPath();
 
         $this->assertEquals($expected, $actual);
     }
 
-    public function testGetUrlQuery()
+    public function testGetQuery()
     {
         $access_key = 'dummy';
 
         $expected = 'keyid=dummy&format=json';
-        $actual = $this->api->getUrlQuery($access_key);
+        $actual = $this->api->getQuery($access_key);
 
         $this->assertEquals($expected, $actual);
     }
@@ -36,7 +36,7 @@ class RestSearchTest extends \PHPUnit_Framework_TestCase
         $this->api->latitude($value);
 
         $needle = 'latitude=35.670083';
-        $haystack = $this->api->getUrlQuery(null);
+        $haystack = $this->api->getQuery(null);
 
         $this->assertContains($needle, $haystack);
     }
@@ -47,7 +47,7 @@ class RestSearchTest extends \PHPUnit_Framework_TestCase
         $this->api->longitude($value);
 
         $needle = 'longitude=139.763267';
-        $haystack = $this->api->getUrlQuery(null);
+        $haystack = $this->api->getQuery(null);
 
         $this->assertContains($needle, $haystack);
     }
@@ -58,7 +58,7 @@ class RestSearchTest extends \PHPUnit_Framework_TestCase
         $this->api->range($range);
 
         $needle = 'range=2';
-        $haystack = $this->api->getUrlQuery(null);
+        $haystack = $this->api->getQuery(null);
 
         $this->assertContains($needle, $haystack);
     }

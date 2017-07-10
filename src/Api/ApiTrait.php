@@ -5,12 +5,12 @@ trait ApiTrait
 {
     private $params = [];
 
-    public function getUrlPath()
+    public function getPath()
     {
         return implode('/', ['', self::API_NAME, self::VERSION, '']);
     }
 
-    public function getUrlQuery($access_key)
+    public function getQuery($access_key)
     {
         $required = [
             'keyid' => $access_key,
