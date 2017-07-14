@@ -3,23 +3,24 @@ namespace Gnavi\Api;
 
 trait ApiTrait
 {
-    private $params = [];
+    private $query_params = [];
+
+    public function addQueryParam($key, $value)
+    {
+        $this->query_params[$key] = $value;
+        return $this;
+    }
 
     public function getPath()
     {
-        return implode('/', ['', self::API_NAME, self::VERSION, '']);
+        return '/' . self::API_NAME . '/' . self::VERSION . '/';
     }
 
     public function getQuery($access_key)
     {
-        $required = [
-            'keyid' => $access_key,
-            'format' => 'json',
-        ];
-
+        $required = ['keyid' => $access_key, 'format' => 'json'];
         return http_build_query(
-            $required + $this->params,
-            '', '&', PHP_QUERY_RFC3986
+            $required + $this->query_params, '', '&', PHP_QUERY_RFC3986
         );
     }
 }

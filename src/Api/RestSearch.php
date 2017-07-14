@@ -13,19 +13,16 @@ class RestSearch implements ApiInterface
 
     public function latitude($latitude)
     {
-        $this->params['latitude'] = $latitude;
-        return $this;
+        return $this->addQueryParam('latitude', $latitude);
     }
 
     public function longitude($longitude)
     {
-        $this->params['longitude'] = $longitude;
-        return $this;
+        return $this->addQueryParam('longitude', $longitude);
     }
 
     public function range($range)
     {
-        $this->params['range'] = $range;
-        return $this;
+        return $this->addQueryParam('range', $range);
     }
 }

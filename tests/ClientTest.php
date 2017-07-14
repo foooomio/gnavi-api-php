@@ -16,8 +16,10 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ->range(\Gnavi\Util\Range::R500);
 
         $client = new Client($access_key);
-        $response = $client->request($api);
+        $result = $client->request($api);
 
-        var_dump($response['rest'][0]);
+        foreach($result as $shop) {
+            var_dump($shop['name']);
+        }
     }
 }
