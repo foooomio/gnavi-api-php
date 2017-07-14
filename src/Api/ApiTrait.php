@@ -5,8 +5,11 @@ trait ApiTrait
 {
     private $query_params = [];
 
-    public function addQueryParam($key, $value)
+    public function addQueryParam($key, $value, $validate = null)
     {
+        if (isset($validate) && !call_user_func('is_'.$validate, $value)) {
+            throw new \InvalidArgumentException("$key must be $validate.");
+        }
         $this->query_params[$key] = $value;
         return $this;
     }
